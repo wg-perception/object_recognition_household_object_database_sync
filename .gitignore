@@ -1,0 +1,8 @@
+cmake_install.cmake
+scratch
+bin
+.*
+apps
+*.bak
+build
+*.pyc
