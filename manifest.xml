@@ -9,7 +9,7 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/object_recognition_household_object_database_sync</url>
   <depend package="household_objects_database"/>
-  <depend package="object_recognition"/>
+  <depend package="object_recognition_core"/>
 
 </package>
 
