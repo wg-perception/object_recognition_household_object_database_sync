@@ -69,6 +69,7 @@ struct Options
   std::string object_id;
   std::string object_description;
   std::string geometry_file, thumbnail_file;
+  std::string method;
   std::vector<std::string> tags;
 };
 
@@ -81,6 +82,8 @@ int options(int ac, char ** av, Options& opts)
                      "Mesh file in binary ply format.");
   desc.add_options()("thumbnail,T", po::value<std::string>(&opts.thumbnail_file)->default_value("thumb.jpg"),
                      "A thumbnail file of the object.");
+  desc.add_options()("method,M", po::value<std::string>(&opts.method)->default_value(""),
+                     "The object name.");
   desc.add_options()("name,N", po::value<std::string>(&opts.object_name)->default_value(""),
                      "The object name.");
   desc.add_options()("description,D", po::value<std::string>(&opts.object_description)->default_value(""),
@@ -102,6 +105,11 @@ int options(int ac, char ** av, Options& opts)
   if (opts.object_name.empty())
   {
     std::cout << "You must supply an object name." << std::endl;
+    return 1;
+  }
+  if (opts.method.empty())
+  {
+    std::cout << "You must supply a method." << std::endl;
     return 1;
   }
   if (opts.object_description.empty())
@@ -190,7 +198,7 @@ void getOriginalModelInfo(household_objects_database::DatabaseOriginalModel &ori
 
   //hard-coded for TOD objects
   original_model.source_.data() = "Household";
-  original_model.acquisition_method_.data() = "TOD";
+  original_model.acquisition_method_.data() = opts.method;
   original_model.maker_.data() = "Unknown";
   original_model.model_.data() = opts.object_name;
   original_model.recognition_id_.data() = opts.object_id;
