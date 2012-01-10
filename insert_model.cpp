@@ -114,8 +114,9 @@ int options(int ac, char ** av, Options& opts)
   }
   if (opts.object_description.empty())
   {
-    std::cout << "You must supply an object description." << std::endl;
-    return 1;
+    //std::cout << "You must supply an object description." << std::endl;
+    //return 1;
+    opts.object_description = opts.object_name;
   }
   return 0;
 }
